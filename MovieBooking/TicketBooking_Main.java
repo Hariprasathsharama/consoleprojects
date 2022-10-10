@@ -1,5 +1,4 @@
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -53,7 +52,8 @@ public class TicketBooking_Main {
     public void audiencebooking() {
         for (Moviedetails movie : updatedmovies) {
             System.out.println(
-                    "Movieid->" + "  " + movie.getMovieid() +"-----" + " " + "Moviename->" + "  " + movie.getMoviename());
+                    "Movieid->" + "  " + movie.getMovieid() + "-----" + " " + "Moviename->" + "  "
+                            + movie.getMoviename());
 
         }
         System.out.println("Choose which movie?");
@@ -73,24 +73,24 @@ public class TicketBooking_Main {
         String name = input.next();
         System.out.println("Enter how many tickets");
         byte number_of_ticket = input.nextByte();
-        
-        String moviename="";int ticketcost=0;
+
+        String moviename = "";
+        int ticketcost = 0;
         for (Moviedetails movie : updatedmovies) {
             if (movie.getMovieid() == choosemovie) {
-                if(number_of_ticket<movie.getSeat()){
-                 ticketcost = movie.getTicketcost() * number_of_ticket;
-                 moviename = movie.getMoviename();
-                audience_record.add(new Audience(name, moviename, number_of_ticket, ticketcost));
-                int Availableseat=movie.getSeat()-number_of_ticket;
-                updateseat(moviename, Availableseat);
-                }
-                else{
+                if (number_of_ticket < movie.getSeat()) {
+                    ticketcost = movie.getTicketcost() * number_of_ticket;
+                    moviename = movie.getMoviename();
+                    audience_record.add(new Audience(name, moviename, number_of_ticket, ticketcost));
+                    int Availableseat = movie.getSeat() - number_of_ticket;
+                    updateseat(moviename, Availableseat);
+                } else {
                     System.out.println("Sorry ,ticket not available for this movie!");
                     audiencebooking();
                 }
             }
         }
-       
+
         System.out.println("Movie Name" + "  ->  " + moviename);
         System.out.println("Name ->    " + name);
         System.out.println("Number of Tickets ->   " + number_of_ticket);
@@ -103,7 +103,7 @@ public class TicketBooking_Main {
     public void showmovies() {
         for (Moviedetails movie : updatedmovies) {
             System.out.println(movie.getMovieid() + " | " + "MovieName-> " + movie.getMoviename() + " | "
-                     + " | " + "TicketCost-> " + movie.getTicketcost() + " | "
+                    + " | " + "TicketCost-> " + movie.getTicketcost() + " | "
                     + "Availableseat-> " + movie.getSeat());
         }
 
@@ -115,7 +115,8 @@ public class TicketBooking_Main {
             java.sql.Statement statement = connection.createStatement();
             ResultSet resultset = ((java.sql.Statement) statement).executeQuery("select * from moviesdetails");
             while (resultset.next()) {
-                updatedmovies.add(new Moviedetails(resultset.getByte(1), resultset.getString(2),resultset.getInt(3), resultset.getInt(4)));
+                updatedmovies.add(new Moviedetails(resultset.getByte(1), resultset.getString(2), resultset.getInt(3),
+                        resultset.getInt(4)));
 
             }
         }
@@ -124,11 +125,13 @@ public class TicketBooking_Main {
             e.printStackTrace();
         }
     }
-    public void updateseat(String moviesname,int seats) {
+
+    public void updateseat(String moviesname, int seats) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/ticketbooking", "root",
                 "Chrisevans@2309")) {
-            Statement statement=connection.createStatement();
-            statement.executeUpdate("update moviesdetails set seat="+seats+" where moviename = '"+moviesname+"';");
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(
+                    "update moviesdetails set seat=" + seats + " where moviename = '" + moviesname + "';");
         } catch (SQLException e) {
 
             e.printStackTrace();

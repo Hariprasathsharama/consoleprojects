@@ -64,7 +64,7 @@ public class TheatreAdmin {
     }
 
     public void updatetodatabase() {
-       
+
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/ticketbooking", "root",
                 "Chrisevans@2309")) {
             PreparedStatement preparedstatement = connection.prepareStatement(sql);
@@ -89,5 +89,4 @@ public class TheatreAdmin {
 
     }
 
-    
 }

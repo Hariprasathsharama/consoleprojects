@@ -7,7 +7,7 @@ public class Bank_Main {
 
     public static void main(String[] args) throws SQLException {
         Scanner input = new Scanner(System.in);
-        Customer customer = new Customer();
+        Managecustomer customer = new Managecustomer();
         System.out.println("WELCOME TO INDIAN BANK");
         System.out.println("Enter the choice 1) Signup 2) Login");
         byte option = 0;
@@ -38,7 +38,7 @@ public class Bank_Main {
                 customer.accountverify();
                 break;
             case 3:
-            break;
+                break;
         }
         input.close();
     }

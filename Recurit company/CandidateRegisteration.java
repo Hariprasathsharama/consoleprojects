@@ -1,4 +1,4 @@
-import java.sql.BatchUpdateException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -131,7 +131,8 @@ public class CandidateRegisteration {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    public String validname(){
+
+    public String validname() {
         while (true) {
             name = s.next();
             String regex = "[a-zA-Z]+\\.?";
@@ -141,7 +142,7 @@ public class CandidateRegisteration {
                 System.out.println("Enter the valid username");
             }
         }
-       
+
     }
 
     public String isValidmail() {
@@ -162,11 +163,11 @@ public class CandidateRegisteration {
         System.out.println("1) Male");
         System.out.println("2) Female");
         while (true) {
-            byte option=0;
+            byte option = 0;
             try {
-                option=s.nextByte();
+                option = s.nextByte();
             } catch (InputMismatchException e) {
-               
+
                 System.out.println("Please enter numeric values");
                 s.nextLine();
             }
@@ -178,21 +179,22 @@ public class CandidateRegisteration {
                 System.out.println("----------------------");
                 System.out.println("Enter the valid option");
                 System.out.println("----------------------");
-               
+
             }
         }
 
     }
-    public Byte validage() throws SQLException{
+
+    public Byte validage() throws SQLException {
         byte age;
         WHILE_LABEL:
 
         while (true) {
             try {
                 age = s.nextByte();
-                if (age >19 && age < 35){
-                    break WHILE_LABEL;}
-                else{
+                if (age > 19 && age < 35) {
+                    break WHILE_LABEL;
+                } else {
                     System.out.println("You not eligible for this application");
                     System.out.println("Retrun to home page");
                     createuser();
@@ -205,68 +207,65 @@ public class CandidateRegisteration {
         return age;
     }
 
-    public int validyear() throws SQLException{
-       
-     while (true) {
-           int year=0;
-      try {
-            year=s.nextInt();
-      }
-      catch(InputMismatchException e){
-      
-        s.nextLine();
-        System.out.println("please enter valid option");
-      }
-      if(year>2017 && year<=2022 ){
-        return year;
-        
-      }
-     else{
-        System.out.println("you are eligible for this application");
-        System.out.println("Return to home page");
-        createuser();
-     }
+    public int validyear() throws SQLException {
+
+        while (true) {
+            int year = 0;
+            try {
+                year = s.nextInt();
+            } catch (InputMismatchException e) {
+
+                s.nextLine();
+                System.out.println("please enter valid option");
+            }
+            if (year > 2017 && year <= 2022) {
+                return year;
+
+            } else {
+                System.out.println("you are eligible for this application");
+                System.out.println("Return to home page");
+                createuser();
+            }
+        }
+
     }
-    
-}
+
     public String degrees() {
         int j = 1;
-        byte option=0;
+        byte option = 0;
         for (String i : degrees) {
 
             System.out.println(j + ")" + " " + i);
             j++;
         }
         while (true) {
-            
-        
-        try{
-             option = s.nextByte();
-        }
-        catch(InputMismatchException e){
-            System.out.println("please enter valid option");
-            s.nextLine();
-        }
-        switch (option) {
-            case 1:
-                return degrees.get(1);
 
-            case 2:
-                return degrees.get(2);
-            case 3:
-                return degrees.get(3);
-            case 4:
-                return degrees.get(4);
-            default:
-            System.out.println("Enter valid  option");
-         
+            try {
+                option = s.nextByte();
+            } catch (InputMismatchException e) {
+                System.out.println("please enter valid option");
+                s.nextLine();
+            }
+            switch (option) {
+                case 1:
+                    return degrees.get(1);
+
+                case 2:
+                    return degrees.get(2);
+                case 3:
+                    return degrees.get(3);
+                case 4:
+                    return degrees.get(4);
+                default:
+                    System.out.println("Enter valid  option");
+
+            }
+
         }
-          
-    }
     }
 
     public String roles() {
-        byte option=0;
+        byte option = 0;
         int j = 1;
         for (String i : jobroles) {
 
@@ -275,28 +274,29 @@ public class CandidateRegisteration {
 
         }
         while (true) {
-            
-        try {
-            option=s.nextByte();
-         } catch (InputMismatchException e) {
-            System.out.println("please enter numeric values");
-            s.nextLine();
-         }
-        switch (option) {
-            case 1:
-                return jobroles.get(0);
 
-            case 2:
-                return jobroles.get(1);
-            case 3:
-                return jobroles.get(2);
-            case 4:
-                return jobroles.get(3);
+            try {
+                option = s.nextByte();
+            } catch (InputMismatchException e) {
+                System.out.println("please enter numeric values");
+                s.nextLine();
+            }
+            switch (option) {
+                case 1:
+                    return jobroles.get(0);
+
+                case 2:
+                    return jobroles.get(1);
+                case 3:
+                    return jobroles.get(2);
+                case 4:
+                    return jobroles.get(3);
+            }
+            System.out.println("Enter valid option");
         }
-        System.out.println("Enter valid option");
     }
-    }
-    public void updatetodatabase() {
+
+    public void updatetodatabase() throws SQLException {
         try (
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/candidatetable", "root",
                         "Chrisevans@2309");
@@ -316,35 +316,7 @@ public class CandidateRegisteration {
             }
             int[] count = preparedstatement.executeBatch();
             System.out.println(Arrays.toString(count));
-        } catch (BatchUpdateException batchUpdateException) {
-            printBatchupdateException(batchUpdateException);
-        } catch (SQLException e) {
-            printSQLException(e);
+
         }
     }
-
-    private static void printSQLException(SQLException ex) {
-        for (Throwable e : ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("Sqlstate" + ((SQLException) e).getSQLState());
-                System.err.println("Error code " + ((SQLException) e).getErrorCode());
-                System.err.println("Message" + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause" + t);
-                    t = t.getCause();
-                }
-            }
-        }
-    }
-
-    public static void printBatchupdateException(BatchUpdateException b) {
-        System.err.println("sqlstate" + b.getSQLState());
-        System.err.println("Message" + b.getMessage());
-        System.err.println("Vendor" + b.getErrorCode());
-        System.err.println("Update counts: ");
-
-    }
-
 }

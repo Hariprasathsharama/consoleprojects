@@ -4,7 +4,7 @@ public class Moviedetails {
     private String moviename;
     private int ticketcost;
     private int seat;
-    
+
     public Moviedetails() {
 
     }

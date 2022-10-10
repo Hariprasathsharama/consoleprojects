@@ -12,27 +12,27 @@ public class Manageusers {
     public void user() throws SQLException {
         Userpage();
         byte option = 0;
-            System.out.println("Enter the option");
+        System.out.println("Enter the option");
 
-                option = input.nextByte();
+        option = input.nextByte();
 
-            switch (option) {
-                case 1:
+        switch (option) {
+            case 1:
 
-                    login();
-                    break;
-                case 2:
+                login();
+                break;
+            case 2:
 
-                    new CandidateRegisteration().createuser();
+                new CandidateRegisteration().createuser();
 
-                    break;
-                case 3:
+                break;
+            case 3:
 
-                    break;
-                default:
-                    System.out.println("print valid number");
-            }
+                break;
+            default:
+                System.out.println("print valid number");
         }
+    }
 
     public static void Userpage() {
         System.out.println();
@@ -106,12 +106,10 @@ public class Manageusers {
                             System.out.println("congratulations! your application is shortlisted");
                             System.out.println("we will contact you later");
                             break;
-                        }
-                        else if(resultset.getString(10).equals("Rejected")){
+                        } else if (resultset.getString(10).equals("Rejected")) {
                             System.out.println("Sorry! your profile is not eligible for this role");
                             System.out.println("Hope you get a good carrer");
-                        } 
-                        else {
+                        } else {
                             System.out.println("you application is still pending");
                             break;
                         }
