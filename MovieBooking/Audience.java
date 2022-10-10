@@ -1,4 +1,3 @@
-package Moviebooking;
 
 public class Audience {
     String name;

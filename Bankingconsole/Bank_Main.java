@@ -3,7 +3,7 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Bank {
+public class Bank_Main {
 
     public static void main(String[] args) throws SQLException {
         Scanner input = new Scanner(System.in);

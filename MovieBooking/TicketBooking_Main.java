@@ -1,4 +1,4 @@
-package Moviebooking;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class TicketBooking {
+public class TicketBooking_Main {
     TheatreAdmin movies = new TheatreAdmin();
     ArrayList<Moviedetails> updatedmovies = new ArrayList<>();
     ArrayList<Audience> audience_record = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        TicketBooking booking = new TicketBooking();
+        TicketBooking_Main booking = new TicketBooking_Main();
         booking.movielist();
         booking.showmovies();
         booking.bookmovie();

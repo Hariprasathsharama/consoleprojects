@@ -1,4 +1,3 @@
-package Moviebooking;
 
 public class Moviedetails {
     private byte movieid;

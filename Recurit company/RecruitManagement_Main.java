@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 
-public class RecruitManagement {
+public class RecruitManagement_Main {
 
     public static void main(String[] args) throws Exception {
       
